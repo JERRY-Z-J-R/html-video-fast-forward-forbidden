@@ -26,18 +26,15 @@
         var video = document.getElementById("video");
         // 当前视频已播放到达过的最大时长
         var maxTime = 0;
-        // seeked：当用户已经移动/跳跃到视频中新的位置时触发
-        video.addEventListener('seeked', function () {
-            // 移动/跳跃快进时，跳转回最大时长处
-            if (this.currentTime > maxTime) {
-                this.currentTime = maxTime;
-            }
-        }, false);
         // timeupdate：已播放时长改变时触发
         video.addEventListener('timeupdate', function () {
             if (this.currentTime - maxTime > 0 && this.currentTime - maxTime < 0.3) {
                 // 更新最大时长
                 maxTime = this.currentTime;
+            }
+            // 移动/跳跃快进时，跳转回最大时长处
+            if (this.currentTime > maxTime) {
+                this.currentTime = maxTime;
             }
         }, false);
     </script>
